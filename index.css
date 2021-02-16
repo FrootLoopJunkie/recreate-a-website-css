@@ -1,0 +1,251 @@
+*{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+body {
+    background : rgb(5, 5, 5);
+}
+
+button {
+    cursor : pointer;
+}
+
+#topBarDiv {
+    position : fixed;
+    background : rgb(27, 27, 27);
+    height : 45px;
+    top : 0;
+    left : 0;
+    width : 100vw;
+    border-bottom : 1px solid rgb(65, 65, 65);
+    z-index: 1;
+}
+
+#homeButton {
+    width : 10%;
+    position : relative;
+    top : 5px;
+    width : 10%;
+    height : 30px;
+    border-radius : 20px;
+    top : 5px;
+    left : 10px;
+    background :rgb(39, 39, 39);
+    border : 1px solid rgb(65, 65, 65);
+    color : white;
+}
+
+#usernameInput{
+    position : absolute;
+    left : 12%;
+    width : 10%;
+    top : 5px;
+    height : 30px;
+    border-radius : 5px;
+    background : rgb(41, 41, 41);
+    color : white;
+}
+
+#searchBar {
+    position : relative;
+    left : 18%;
+    width : 40%;
+    top : 5px;
+    height : 30px;
+    border-radius : 5px;
+    background :rgb(39, 39, 39);
+    border : 1px solid rgb(65, 65, 65);
+    color : white;
+}
+
+#createPostDiv{
+    position : relative;
+    left : 35%;
+    top : 55px;
+    width : 30%;
+    height : 60px;
+    border-radius : 5px;
+    background : rgb(27, 27, 27);
+    border : 1px solid rgb(65, 65, 65);
+}
+
+#createPostInput {
+    position : relative;
+    background :rgb(39, 39, 39);
+    border : 1px solid rgb(65, 65, 65);
+    width : 80%;
+    height : 80%;
+    top : 5%;
+    color : white;
+    resize : none;
+}
+
+#userImage{
+    background : rgb(82, 82, 82);
+    border-radius: 50px;
+}
+
+#sortBarDiv{
+    position : relative;
+    left : 35%;
+    top : 72px;
+    width : 30%;
+    height : 60px;
+    border-radius : 5px;
+    background : rgb(27, 27, 27);
+    border : 1px solid rgb(65, 65, 65);
+}
+
+.sortBarButton{
+    position: relative;
+    background : rgb(27, 27, 27);
+    border : none;
+    color : rgb(139, 139, 139);
+    width : 100px;
+    height : 40px;
+    border-radius: 20px;
+    top : 10px;
+    left : 5px;
+    font-weight: bold;
+}
+
+.sortBarButton:hover{
+    background :rgb(54, 54, 54);
+}
+
+#postContainer{
+    position : relative;
+    left : 35%;
+    top : 70px;
+    width : 30%;
+    height : auto;
+}
+
+.post{
+    color : white;
+    height : 100%;
+    padding : 10px;
+    border-radius : 5px;
+    background : rgb(27, 27, 27);
+    border : 1px solid rgb(65, 65, 65);
+    margin-top : 20px;
+}
+
+.postUpArrow{
+    cursor : pointer;
+}
+
+.postDownArrow{
+    cursor : pointer;
+    position: relative;
+    right : 35.5px;
+    top : 44px;
+}
+
+.postVotes{
+    position: relative;
+    right : 17.5px;
+    top : 20px;
+    color : red;
+}
+
+.postSubreddit{
+    position : relative;
+    right : 30px;
+    font-size : 10px;
+}
+
+.postPoster{
+    position : relative;
+    right : 30px;
+    color : grey;
+    font-size : 10px;
+}
+
+.postTitle{
+    position : relative;
+    left : 5%;
+    padding : 10px;
+}
+
+.postImg{
+    position : relative;
+    left : 5%;
+}
+
+.postButton{
+    position: relative;
+    background : rgb(27, 27, 27);
+    border : none;
+    color : rgb(139, 139, 139);
+    height : 20px;
+    border-radius: 20px;
+    top : 5px;
+    left : 25px;
+    font-weight: bold;
+}
+
+.postButton:hover{
+    background :rgb(54, 54, 54);
+}
+
+#topCommunitiesDiv{
+    position : absolute;
+    left : 67%;
+    top : 63px;
+    width : 15%;
+    height : 400px;
+    border-radius : 5px;
+    background : rgb(27, 27, 27);
+    border : 1px solid rgb(65, 65, 65);
+}
+
+#communitesTitleCont{
+    position : absolute;
+    background : rgb(56, 121, 206);
+    width : 100%;
+    height : 100px;
+}
+
+#topCommunitiesTitle{
+    top : 50%;
+    position : relative;
+    left : 15px;
+    color : white;
+}
+
+#topCommunities{
+    position: relative;
+    top : 100px;
+    text-indent: 5px;
+}
+
+.communityList{
+    position: relative;
+    width : 284px;
+    height : 40px;
+    right : 40px;
+    border-bottom : 1px solid rgb(63, 63, 63);
+    padding-top : 10px;
+    color : white;
+    list-style-type: none;
+    cursor: pointer;
+}
+
+@keyframes highlight{
+    0%  {border : 2px solid red}
+    25%  {border : 2px solid grey}
+    50% {border : 2px solid red}
+    75% {border : 2px solid grey}
+    100%  {border : 2px solid red}
+}
+
+.noHighlight{
+    border : 1px solid rgb(65, 65, 65);
+}
+
+.highlight{
+animation-name : highlight;  
+animation-duration: 5s;
+animation-iteration-count: infinite;
+}

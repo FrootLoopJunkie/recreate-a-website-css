@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Reddit</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="icon" href="images/alien.webp">
+    <script src="jquery.js"></script>
+</head>
+<body>
+    <div id=topBarDiv> 
+        <button id=homeButton onClick=location.reload();>
+            HOME BUTTON
+        </button>
+        <input id=usernameInput class=noHighlight placeholder="Enter your username">  
+        <input id=searchBar placeholder="  Search...">  
+    </div>
+    <div id=createPostDiv>
+        <img src="images/alien.webp" width="50px" id=userImage> 
+        <textarea id=createPostInput placeholder="Create Post..." maxlength="160"></textarea>
+    </div>
+    <div id=sortBarDiv>
+        <button class=sortBarButton>Best</button>
+        <button class=sortBarButton>Hot</button>
+        <button class=sortBarButton>New</button>
+        <button class=sortBarButton>Top</button>
+    </div>
+    <div id=postContainer>
+        <div id=examplePost class=post hidden=true>
+            <span class=postUpArrow>/\</span>
+            <span class=postVotes>0</span>
+            <span class=postDownArrow>\/</span>
+            <span class=postSubreddit>SUBREDDIT</span>
+            <span class=postPoster>POSTER</span>
+            <p class=postTitle>TITLE</p>
+            <img class=postImg src=https://c.files.bbci.co.uk/12A9B/production/_111434467_gettyimages-1143489763.jpg width="500px">
+            <button class=postButton>Comments</button>
+            <button class=postButton>Give Award</button>
+            <button class=postButton>Share</button>
+            <button class=postButton>Save</button>
+        </div>
+    </div>
+    <div id=topCommunitiesDiv>
+        <div id=communitesTitleCont>
+            <p id=topCommunitiesTitle>Top Communities</p>
+        </div>
+        <ul id=topCommunities>
+            <li class=communityList>1</li>
+            <li class=communityList>2</li>
+            <li class=communityList>3</li>
+            <li class=communityList>4</li>
+            <li class=communityList>5</li>
+        </ul>
+    </div>
+
+    <script>
+        $(document).ready(function(){
+            let id = 0;
+            let topCommunityID = 1;
+            let posts = 2;
+            let username;
+            
+            generatePost(posts);
+
+            $("#createPostInput").keypress(function(e){
+                if(e.keyCode === 13){
+                    createPost();
+                    $("#createPostInput").val("");
+                }
+            });
+
+            $("#usernameInput").keypress(function(e){
+                if(e.keyCode === 13){
+                    username = $("#usernameInput").val();
+                    $("#usernameInput").hide();
+                    $("#usernameInput").val("");
+                }
+            });
+
+            function createPost(){
+                if(username === undefined){
+                    alert("Please enter a username in the highlighted box before posting");
+                    $("#usernameInput").addClass("highlight");
+                    return false;
+                }
+                input = $("#createPostInput").val();
+                $.get("https://api.thecatapi.com/v1/images/search", function(data){
+                        let source = data[0].url;
+                        $("#examplePost").clone().prependTo("#postContainer").show().attr("id", `postID${id}`);
+                        $(`#postID${id} > .postVotes`).text(random(10));
+                        $(`#postID${id} > .postSubreddit`).text(randomSubreddit());
+                        $(`#postID${id} > .postPoster`).text(username);
+                        $(`#postID${id} > .postTitle`).text(input);
+                        $(`#postID${id} > .postSubreddit`).text(randomSubreddit());
+                        $(`#postID${id} > .postImg`).attr(`src`,`${source}`);
+                        id++;
+                    }) 
+            }
+
+            function generatePost(num){
+                for(let i = 0; i < num; i++){ 
+                $.get("https://api.thecatapi.com/v1/images/search", function(data){
+                        let source = data[0].url;
+                        $("#examplePost").clone().appendTo("#postContainer").show().attr("id", `postID${id}`);
+                        $(`#postID${id} > .postVotes`).text(random(10));
+                        $(`#postID${id} > .postSubreddit`).text(randomSubreddit());
+                        $(`#postID${id} > .postPoster`).text(randomUsername());
+                        $(`#postID${id} > .postTitle`).text(randomTitle());
+                        $(`#postID${id} > .postSubreddit`).text(randomSubreddit());
+                        $(`#postID${id} > .postImg`).attr(`src`,`${source}`);
+                        id++;
+                    }) 
+                }
+            }
+
+            $(window).scroll(function(){
+                scrollDistance = $(window).scrollTop() + $(window).height();
+                if(scrollDistance > $(document).height() - 100){
+                    generatePost(1);
+                }
+            })
+
+            $("#topCommunities > li").each(function(){
+                $(this).text(`${topCommunityID} ${randomSubreddit()}`);
+                topCommunityID ++;
+            })
+
+            function randomUsername(){
+                usernameArray = ["berrystripe","wellmadespectacle","gapbroadcast","hayagenda","sheriffscene","settingaqua","romaineburger","princessethical","canonretire","engineerbrownies","soullesstiler","islandsoccasion","melodybreakfast","yodelkettle","acceptsoothe"]
+
+                return usernameArray[random(usernameArray.length)]
+            }
+
+            function randomSubreddit(){
+                subredditArray = ["r/awww","r/TIL","r/interestingAF","r/woahdude","r/cats","r/news","r/catoverlords","r/snek","r/pawbeans","r/meow","r/riseofthecats","r/theonion","r/fakenews","r/TIFU"]
+                
+                return subredditArray[random(subredditArray.length)]
+            }
+
+            function randomTitle(){
+                titleArray = ["Five Stereotypes About Cats That Aren't Always True.","7 Secrets About Cats That Has Never Been Revealed For The Past 50 Years.","Learn All About Cats From This Politician.","This Story Behind Cats Will Haunt You Forever!","Seven Features Of Cats That Make Everyone Love It.","15 Ways To Learn Cats Effectively.","10 Unexpected Ways Cats Can Make Your Life Better.","Most Effective Ways To Overcome Cats's Problem.","Five Awesome Things You Can Learn From Cats.","7 Beautiful Reasons We Can't Help But Fall In Love With Cats.","7 Things That You Never Expect On Cats."];
+
+                return titleArray[random(titleArray.length)]
+            }
+
+            function random(num){
+                return Math.floor(Math.random()*num)
+            }
+        })
+    </script>
+</body>
+</html>
